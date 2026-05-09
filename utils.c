@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assert_utils.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:23:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 18:09:45 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 13:01:38 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,37 +94,42 @@ int **create_arr(int nb, int term)
     return (tab);
 }
 
-t_list * create_lst(size_t size, void *content)
+void clear_list(void *ptr)
+{
+    return ;
+}
+
+t_list **create_lst(size_t size)
 {
     size_t i;
-    t_list *root;
-    t_list *tmp;
+    t_list **list;
     t_list *node;
 
 
     i = 0;
-    root = NULL;
+    list = malloc(sizeof(t_list *));
+    if (!list)
+        return (NULL);
+    *list = NULL;
     while (i < size)
     {
-        node = ft_lstnew(content);
+        node = ft_lstnew(NULL);
         if(!node)
         {
-            while (root)
-            {
-                tmp = root;
-                root = root->next;
-                free(tmp);
-                tmp = NULL;
-            }
+            ft_lstclear(list, clear_list);
+            free(list);
+            return (NULL);
         }
-        if (!root)
-            root = node;
-        else
-            ft_lstadd_back(&root, node);
+        ft_lstadd_back(list, node);
         i++;   
     }
-    assert(i == size);
-    return (root);
+    if (i != size)
+    {
+        printf("Size of the list is node as expected in %s\n", __func__);
+        ft_lstclear(list, clear_list);
+        return (NULL);
+    }
+    return (list);
     
 }
 
