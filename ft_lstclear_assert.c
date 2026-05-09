@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:20:44 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 15:05:17 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:07:32 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static t_list **create_split_lst(char *content, char sep, void (*f)(void *ptr))
     while (split[i])
     {
         new_node = ft_lstnew(ft_strdup(split[i]));
+        if (i = 3)
+        {
+            free(new_node->content);
+            free(new_node);
+            new_node = NULL;
+        }
         if(!new_node)
         {
             ft_lstclear(lst, f);
