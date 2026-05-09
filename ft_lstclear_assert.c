@@ -6,13 +6,12 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:20:44 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 15:07:32 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:16:36 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-#define SIZE_LST 10
 
 static t_list **create_split_lst(char *content, char sep, void (*f)(void *ptr))
 {
@@ -32,25 +31,19 @@ static t_list **create_split_lst(char *content, char sep, void (*f)(void *ptr))
     if(!lst)
     {
         printf("Error malloc in %s line:%d\n", __func__, __LINE__ - 3);
-        delete_split(split);
+        delete_split(&split);
         return (NULL);
     }
     *lst = NULL;
     while (split[i])
     {
         new_node = ft_lstnew(ft_strdup(split[i]));
-        if (i = 3)
-        {
-            free(new_node->content);
-            free(new_node);
-            new_node = NULL;
-        }
         if(!new_node)
         {
             ft_lstclear(lst, f);
             free(lst);
             lst = NULL;
-            delete_split(split);
+            delete_split(&split);
             return (NULL);
         }
         ft_lstadd_back(lst, new_node);
@@ -113,21 +106,21 @@ int main(void)
     TEST_STAR(test_name);
     int test_nb;
     t_list **list;
-
     test_nb = 1;
     
     /* test 1 */
-    list = create_split_lst("hello_berlin_comment_ca_va_?", '-', delete_str);
+    list = create_split_lst("hello_berlin_comment_ca_va_?", '_', delete_str);
     if(!list)
     {
         printf("Error list creation in %s line %d", __func__, __LINE__ - 3);
         return (1) ;
     }
+
     ft_lstclear_test(test_nb++, list, delete_str);
     free(list);
     
     /* test 2 */
-    list = create_split_lst("hello_berlin_comment_ca_va_?", '-', delete_str);
+    list = create_split_lst("hello_berlin_comment_ca_va_?", '_', delete_str);
     if(!list)
     {
         printf("Error list creation in %s line %d", __func__, __LINE__ - 3);
@@ -136,7 +129,7 @@ int main(void)
     ft_lstclear_test(test_nb++, list, NULL);
     
     // /* test 3 */
-    // ft_lstclear_test(test_nb++, NULL, NULL);
+    ft_lstclear_test(test_nb++, NULL, NULL);
 
 
     TEST_END(test_name);

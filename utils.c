@@ -6,12 +6,18 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:23:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 15:04:35 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:16:30 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
+
+/**
+ * @brief clean un atbleau de string allouer va la fonction ft_split.
+ * @param ptr Un pointeur char ** vers un tableau de string
+ * @return void.
+ */
 void delete_split(void *ptr)
 {
     char ***split;
