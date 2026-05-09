@@ -3,6 +3,7 @@
 void ft_lstnew_test(int test_nb, void *content)
 {
     t_list *node;
+    t_test *test_node;
 
     #ifdef __APPLE__
         size_t (*f)(const void *ptr);
@@ -12,34 +13,42 @@ void ft_lstnew_test(int test_nb, void *content)
         size_t (*f)(void *ptr);
         f = malloc_usable_size;
     #endif
-    printf("Test %d:\n", test_nb++);
 
+    printf("Test %d:\n", test_nb++);
     node = ft_lstnew(content);
     if(!node)
-        printf("Error allocation in lst_new test nb %d\n", test_nb);
-    
-    //check the content
+    {
+        printf("Error allocation in %s line: %d\n", __func__, __LINE__ - 2);
+        return ;
+    }
+    /* checking of the node content */
     if(node->content == content)
         printf("\tcontent compare ->"TEST_OK"\n");
     else
         printf("\tcontent compare ->"TEST_NOK"\n");
     
-    //check the size structure
-    if (f(node) == sizeof(t_test))
+    /* compare the size of the structure with the size of t_test structure */
+    test_node = malloc(sizeof(t_test));
+    if (!test_node)
+    {
+        printf("Error allocation in %s line:%d\n", __func__, __LINE__);
+        return ;
+    }
+    if (f(node) == f(test_node))
         printf("\tmemory size of node ->"TEST_OK"\n");
     else
         printf("\tmemory size of node ->"TEST_NOK"\n");
-
-    // check the next node
+    free(test_node);
+    /* checking if the next node is NULL */
     if (node->next == NULL)
-        printf("\tnode next check ->"TEST_OK"\n");
+        printf("\tnext ptr check ->"TEST_OK"\n");
     else
-        printf("\tnode next check ->"TEST_NOK"\n");
+        printf("\tnext ptr check ->"TEST_NOK"\n");
 
     free(node);
 }
 
-void ft_lst_new_assert(void)
+int main(void)
 {
     char *test_name = "ft_lst_new";
     int test_nb;
@@ -48,20 +57,19 @@ void ft_lst_new_assert(void)
     int r;
     
     test_nb  = 1;
-
-    //test 1
+    /* test 1 */
     str = strdup("hello_berlin");
     ft_lstnew_test(test_nb++,str);
     free(str);
-
-    //test 2
+    
+    /* test 2 */
     r = 10;
     ft_lstnew_test(test_nb++,&r);
-
-    //test 3
+    
+    /* test 2 */
     ft_lstnew_test(test_nb++, NULL);
-
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 14:35:56 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 11:35:29 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 12:18:26 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static void ft_atoi_test(char *s, int test_nb)
     printf("Test %d:\n", test_nb);
     if(original == ft)
     {
-        printf("\tinput:" C_PBG "%s"C_RESET"\n",s);
-        printf("\toriginal atoi output:" C_BBG"%d"C_RESET"\n", original);
-        printf("\tft_atoi output:" C_BBG"%d"C_RESET"\n\tresult -> " TEST_OK "\n", ft);
+        printf("\tInput:" C_PBG "%s"C_RESET"\n",s);
+        printf("\tOutput original atoi: %d\n", original);
+        printf("\tOutput ft_atoi: %d\n\tresult -> " TEST_OK "\n", ft);
     }
     else
     {
-        printf("\tinput:" C_PBG "%s"C_RESET"\n",s);
-        printf("\toriginal atoi output:" C_BBG"%d"C_RESET"\n", original);
-        printf("\tft_atoi output:" C_BBG"%d"C_RESET"\n\t result -> " TEST_NOK "\n", ft);
+        printf("\tInput:" C_PBG "%s"C_RESET"\n",s);
+        printf("\tOutput original atoi: %d\n", original);
+        printf("\tOutput ft_atoi: %d\n\tresult -> " TEST_NOK "\n", ft);
     }
     
 }

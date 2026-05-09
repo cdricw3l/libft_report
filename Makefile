@@ -48,4 +48,10 @@ fclean: clean
 	@rm -f ${NAME}
 	@make fclean -C ${PARENT_DIR}
 
+COM="libft_report"
+git:
+	git add .
+	git commit -m $(COM)
+	git push origin $(shell git branch --show-current)
+
 .PHONY: ${NAME} lib clean fclean

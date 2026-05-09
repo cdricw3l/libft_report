@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:12:59 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 12:40:59 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 12:16:20 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void ft_calloc_test(size_t nmemb, size_t size, int test_nb)
     printf("Test %d:\n", test_nb);
     s1 = calloc(nmemb, size);
     s2 = ft_calloc(nmemb, size);
+    /* checking if the memory size allocation are the same*/
     if(f(s1) == f(s2))
         printf("\tMemory check -> " TEST_OK"\n");
     else
@@ -38,21 +39,29 @@ void ft_calloc_test(size_t nmemb, size_t size, int test_nb)
         free(s2);
 }
 
-void ft_calloc_assert(void)
+int main(void)
 {
     char *name_function = "ft_calloc";
     TEST_STAR(name_function);
     int test_nb;
 
     test_nb = 1;
+    /* test 1*/
     ft_calloc_test(0, 0, test_nb++);
+    /* test 2*/
     ft_calloc_test(-10, -10, test_nb++);
+    /* test 3*/
     ft_calloc_test(-10, 10, test_nb++);
+    /* test 4*/
     ft_calloc_test(10, -10, test_nb++);
+    /* test 5*/
     ft_calloc_test(100, 100, test_nb++);
+    /* test 6*/
     ft_calloc_test(INT_MAX, INT_MAX, test_nb++);
+    /* test 7*/
     ft_calloc_test(INT_MIN, INT_MIN, test_nb++);
     TEST_END(name_function);
     SEP;
     NL;
+    return (0);
 }
