@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:23:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 13:52:36 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:43:39 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,10 @@ void delete_lst(t_list **list)
         tmp_node = *tmp_lst;
         *tmp_lst = (*tmp_lst)->next;
         free(tmp_node);
+        tmp_node = NULL;
     }
+    free(list);
+    list = NULL;
 }
 
 void string_capitalise(void *ptr)

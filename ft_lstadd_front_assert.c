@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:24:03 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 14:27:43 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:31:19 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void ft_lstadd_front_test(int test_number,t_list **liste, t_list *node)
         frk = fork();
         if( frk < 0)
         {
-            printf("Error fork in %s", __func__);
+            printf("Error fork in %s line:%d", __func__, __LINE__);
             return ;
         }
         if(frk == 0)
