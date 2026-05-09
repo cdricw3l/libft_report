@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 14:21:02 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/05/09 12:56:15 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 13:51:20 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void    delete_split(void *ptr);
 void    delete_tab(void *ptr);
 int     **create_arr(int nb, int term);
 void    delete_str(void *ptr);
-void    delete_lst(t_list *list);
-t_list  **create_lst(size_t size, void *content);
+void    delete_lst(t_list **list);
+t_list **create_lst(size_t size);
 void    string_capitalise(void *ptr);
 #endif

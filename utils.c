@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:23:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 13:01:38 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 13:52:36 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int **create_arr(int nb, int term)
 
 void clear_list(void *ptr)
 {
+    (void)ptr;
     return ;
 }
 
@@ -123,25 +124,20 @@ t_list **create_lst(size_t size)
         ft_lstadd_back(list, node);
         i++;   
     }
-    if (i != size)
-    {
-        printf("Size of the list is node as expected in %s\n", __func__);
-        ft_lstclear(list, clear_list);
-        return (NULL);
-    }
     return (list);
-    
 }
 
-void delete_lst(t_list *list)
+void delete_lst(t_list **list)
 {
-    t_list *tmp;
+    t_list **tmp_lst;
+    t_list *tmp_node;
 
-    while (list)
+    tmp_lst = list;
+    while (*tmp_lst)
     {
-        tmp = list;
-        list = list->next;
-        free(tmp);
+        tmp_node = *tmp_lst;
+        *tmp_lst = (*tmp_lst)->next;
+        free(tmp_node);
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:24:03 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 13:03:31 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:28:54 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,59 +39,73 @@ void ft_lstadd_back_test(int test_number,t_list **liste, t_list *node)
         else
         {
             waitpid(frk, &stat, 0);
-            if(stat == 0)
+            if(WIFEXITED(stat))
             {
-                printf("\tlst add back ->"TEST_OK"\n");
+                printf("\tft_lstadd_back ->"TEST_OK"\n");
                 printf("\tCheck null protection -> "TEST_OK"\n");
             }
             else
             {
                 printf("\tCheck null protection -> "TEST_NOK"\n");
-                printf("\tlst add back ->"TEST_NOK"\n");
+                printf("\tft_lstadd_back ->"TEST_NOK"\n");
             }
             return ;
         }
     }
     else
     {
-        ft_lstadd_back(&liste, node);
-        tmp = liste;
+        ft_lstadd_back(liste, node);
+        tmp = *liste;
         while (tmp->next)
             tmp = tmp->next;
         if (tmp == node)
-            printf("\tlst add back ->"TEST_OK"\n");
+            printf("\tft_lstadd_back ->"TEST_OK"\n");
         else
-            printf("\tlst add back ->"TEST_NOK"\n");
+            printf("\tft_lstadd_back ->"TEST_NOK"\n");
     }
 
 }
 
 int main(void)
 {
-    char *test_name = "lstadd_back";
+    char *test_name = "ft_lstadd_back";
     TEST_STAR(test_name);
     int test_number;
     t_list **list;
-    t_list *node;
+    t_list *node1;
+    t_list *node2;
     test_number = 1;
 
-    list = create_lst(5, NULL);
+    list = create_lst(0);
     if(!list)
     {
         printf("Error creation list in %s line %d\n",__func__, __LINE__);
         return (1);
     }
-    node = ft_lstnew(NULL);
-    if(!node)
+    assert(!ft_lstsize(*list));
+    /* test 1 */
+    node1 = ft_lstnew(NULL);
+    if(!node1)
     {
         printf("Error creation node in %s line:%d\n", __func__, __LINE__);
         delete_lst(list);
         return  (1);
     }
-    /* test 1 */
-    ft_lstadd_back_test(test_number++, list, node);
+    ft_lstadd_back_test(test_number++, list, node1);
+    assert(ft_lstsize(*list) == 1);
     /* test 2 */
-    ft_lstadd_back_test(test_number++, NULL, node);
+    node2 = ft_lstnew(NULL);
+    if(!node2)
+    {
+        printf("Error creation node in %s line:%d\n", __func__, __LINE__);
+        delete_lst(list);
+        return  (1);
+    }
+    ft_lstadd_back_test(test_number++, list, node2);
+    assert(ft_lstsize(*list) == 2);
+    /* test 2 */
+    ft_lstadd_back_test(test_number++, NULL, NULL);
+    assert(ft_lstsize(*list) == 2);
     delete_lst(list);
     TEST_END(test_name);
     SEP;
