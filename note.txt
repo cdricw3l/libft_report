@@ -1,0 +1,4 @@
+to do:
+
+ft_lstdelone_test
+ft_lstmap

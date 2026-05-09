@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:24:03 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 14:28:54 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:10:42 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void ft_lstadd_back_test(int test_number,t_list **liste, t_list *node)
             waitpid(frk, &stat, 0);
             if(WIFEXITED(stat))
             {
-                printf("\tft_lstadd_back ->"TEST_OK"\n");
+                printf("\tlast node check ->"TEST_OK"\n");
                 printf("\tCheck null protection -> "TEST_OK"\n");
             }
             else
             {
+                printf("\tlast node check ->"TEST_NOK"\n");
                 printf("\tCheck null protection -> "TEST_NOK"\n");
-                printf("\tft_lstadd_back ->"TEST_NOK"\n");
             }
             return ;
         }
@@ -59,9 +59,9 @@ void ft_lstadd_back_test(int test_number,t_list **liste, t_list *node)
         while (tmp->next)
             tmp = tmp->next;
         if (tmp == node)
-            printf("\tft_lstadd_back ->"TEST_OK"\n");
+            printf("\tlast node check ->"TEST_OK"\n");
         else
-            printf("\tft_lstadd_back ->"TEST_NOK"\n");
+            printf("\tlast node check  ->"TEST_NOK"\n");
     }
 
 }
@@ -88,7 +88,7 @@ int main(void)
     if(!node1)
     {
         printf("Error creation node in %s line:%d\n", __func__, __LINE__);
-        delete_lst(list);
+        delete_lst(list, NULL);
         return  (1);
     }
     ft_lstadd_back_test(test_number++, list, node1);
@@ -98,7 +98,7 @@ int main(void)
     if(!node2)
     {
         printf("Error creation node in %s line:%d\n", __func__, __LINE__);
-        delete_lst(list);
+        delete_lst(list, NULL);
         return  (1);
     }
     ft_lstadd_back_test(test_number++, list, node2);
@@ -106,7 +106,7 @@ int main(void)
     /* test 2 */
     ft_lstadd_back_test(test_number++, NULL, NULL);
     assert(ft_lstsize(*list) == 2);
-    delete_lst(list);
+    delete_lst(list, NULL);
     TEST_END(test_name);
     SEP;
     NL;

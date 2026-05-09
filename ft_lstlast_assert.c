@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:00:40 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 17:43:20 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:21:57 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,31 @@ void ft_lstlast_test(int test_nb, t_list *lst ,void *ptr)
     }
 }
 
-void ft_lstlast_assert(void)
+int main(void)
 {
     
     char *test_name = "ft_lstlast";
-    
     TEST_STAR(test_name);
-
     int test_number;
 
     test_number = 1;
 
-    t_list *list;
+    t_list **list;
     t_list *node;
 
-    list = create_lst(1, NULL);
+    list = create_lst(10);
     node = ft_lstnew(NULL);
     if(!node)
     {
         printf("Error node creation in %s", __func__);
-        delete_lst(list);
+        delete_lst(list, NULL);
     }
-    ft_lstadd_back(&list, node);
-    ft_lstlast_test(test_number++, list, node);
+    ft_lstadd_back(list, node);
+    /* test 1*/
+    ft_lstlast_test(test_number++, *list, node);
+    /* test 2*/
     ft_lstlast_test(test_number++, NULL, node);
-    delete_lst(list);
+    delete_lst(list, NULL);
     TEST_END(test_name);
     SEP;
     NL;

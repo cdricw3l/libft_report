@@ -22,7 +22,7 @@ UTILS = utils.c
 $(MANDATORY):
 	@make -C $(PARENT_DIR)
 	@$(CC) $(GFLAGS)  $@_assert.c $(UTILS) $(LIB) -o $(NAME)
-	@valgrind --child-silent-after-fork=yes --leak-check=full --show-leak-kinds=all -s ./$(NAME) && rm -f $(NAME)
+	@valgrind  --leak-check=full --show-leak-kinds=all -s ./$(NAME) && rm -f $(NAME)
 
 
 #whithout argument make call the first target
@@ -49,7 +49,7 @@ fclean: clean
 	@make fclean -C ${PARENT_DIR}
 
 COM="libft_report"
-git:
+git: fclean
 	git add .
 	git commit -m $(COM)
 	git push origin $(shell git branch --show-current)

@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:15:55 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 18:20:21 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:17:14 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void ft_lstiter_test(int test_number, t_list *liste, void (*f)(void *))
 
 }
 
-void ft_lstiter_assert(void)
+int main(void)
 {
     char *test_name = "ft_lstiter";
     TEST_STAR(test_name);
@@ -86,13 +86,13 @@ void ft_lstiter_assert(void)
     if(!list)
     {
         printf("Error list initialisation in %s\n",__func__);
-        return ;
+        return (1);
     }
     split = ft_split("hello_berlin_how_are_u", '_');
     if(!split)
     {
         printf("Error split in %s\n", __func__);
-        return ;
+        return (1) ;
     }
     i = 0;
     *list = NULL;
@@ -104,24 +104,25 @@ void ft_lstiter_assert(void)
             ft_lstclear(list, delete_str);
             delete_split(&split);
             free(list);
-            return;
+            return(1);
         }
         ft_lstadd_back(list, node);
         i++;
     }
     delete_split(&split);
     test_number = 1;
-    //TEST 1
+    /* test 1 */
     ft_lstiter_test(test_number++, *list, string_capitalise);
-    //TEST 2
+    /* test 2 */
     ft_lstiter_test(test_number++, NULL, string_capitalise);
-    //TEST 3
+    /* test 3 */
     ft_lstiter_test(test_number++, *list, NULL);
-    //TEST 4
+    /* test 4 */
     ft_lstiter_test(test_number++, NULL, NULL);
     ft_lstclear(list,delete_str);
     free(list);
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

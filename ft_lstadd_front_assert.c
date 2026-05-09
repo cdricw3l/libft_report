@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:24:03 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 14:31:19 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:15:29 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void ft_lstadd_front_test(int test_number,t_list **liste, t_list *node)
             waitpid(frk, &stat, 0);
             if(WIFEXITED(stat))
             {
-                printf("\tft_lstadd_front ->"TEST_OK"\n");
+                printf("\tfirst node check ->"TEST_OK"\n");
                 printf("\tCheck null protection -> "TEST_OK"\n");
             }
             else
             {
+                printf("\tfirst node check ->"TEST_NOK"\n");
                 printf("\tCheck null protection -> "TEST_NOK"\n");
-                printf("\tft_lstadd_front ->"TEST_NOK"\n");
             }
             return ;
         }
@@ -55,9 +55,9 @@ void ft_lstadd_front_test(int test_number,t_list **liste, t_list *node)
     {
         ft_lstadd_front(liste, node);
         if (*liste == node)
-            printf("\tlst add front ->"TEST_OK"\n");
+            printf("\tfirst node check ->"TEST_OK"\n");
         else
-            printf("\tlst add front ->"TEST_NOK"\n");
+            printf("\tfirst node check ->"TEST_NOK"\n");
     }
 
 }
@@ -84,7 +84,7 @@ int main(void)
     if(!node1)
     {
         printf("Error creation node in %s line:%d\n", __func__, __LINE__);
-        delete_lst(list);
+        delete_lst(list, NULL);
         return (1);
     }
     ft_lstadd_front_test(test_number++, list, node1);
@@ -94,7 +94,7 @@ int main(void)
     if(!node2)
     {
         printf("Error creation node in %s line:%d\n", __func__, __LINE__);
-        delete_lst(list);
+        delete_lst(list, NULL);
         return  (1);
     }
     ft_lstadd_front_test(test_number++, list, node2);
@@ -103,7 +103,7 @@ int main(void)
     /* test 3 */
     ft_lstadd_front_test(test_number++, NULL, NULL);
 
-    delete_lst(list);
+    delete_lst(list, NULL);
     SEP;
     NL;
     TEST_END(test_name);

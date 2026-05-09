@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:15:55 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 18:22:58 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 18:49:05 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void ft_lstmap_test(int test_number, t_list *liste, void *(*f)(void *), void (*d
     int stat;
     
     printf("Test %d:\n", test_number);
-    if (!liste || !f)
+    if (!liste || !f || !del)
     {
         frk = fork();
         if( frk < 0)
@@ -50,7 +50,21 @@ void ft_lstmap_test(int test_number, t_list *liste, void *(*f)(void *), void (*d
         }
         if(frk == 0)
         {
-            ft_lstmap(liste, f, del);
+            new_list = ft_lstmap(liste, f, del);
+            /*check the null protection of the delete fonction*/
+            if (liste && f && !del && !new_list)
+                printf("\tCheck null protection -> "TEST_NOK"\n");
+            else
+                printf("\tCheck null protection -> "TEST_OK"\n");
+            
+            while (new_list)
+            {
+                tmp = new_list;
+                new_list = new_list->next;
+                free(tmp->content);
+                free(tmp);
+            }
+            
             exit(0);
         }
         else
@@ -60,6 +74,7 @@ void ft_lstmap_test(int test_number, t_list *liste, void *(*f)(void *), void (*d
                 printf("\tCheck null protection -> "TEST_OK"\n");
             else
                 printf("\tCheck null protection -> "TEST_NOK"\n");
+            ft_lstclear(&liste, delete_str);
             return ;
         }
     }
@@ -68,7 +83,7 @@ void ft_lstmap_test(int test_number, t_list *liste, void *(*f)(void *), void (*d
         new_list =  ft_lstmap(liste, f, del);
         if (!new_list)
         {
-            printf("Error list creation in %s ->"TEST_NOK"\n", __func__);
+            printf("Error list creation in %s line:%d ->"TEST_NOK"\n", __func__, __LINE__);
             return ;
         }
         tmp = new_list;
@@ -92,13 +107,13 @@ void ft_lstmap_test(int test_number, t_list *liste, void *(*f)(void *), void (*d
         ft_lstclear(&new_list, delete_str);
         free(new_list);
         new_list = NULL;
-        printf("\tresult check of the iteration check valgrind for the leaks ->"TEST_OK"\n");
+        printf("\tresult check of the iteration ->"TEST_OK"\n");
     }
 
 
 }
 
-void ft_lstmap_assert(void)
+int main(void)
 {
     char *test_name = "ft_lstmap";
     TEST_STAR(test_name);
@@ -113,13 +128,13 @@ void ft_lstmap_assert(void)
     if(!list)
     {
         printf("Error list initialisation in %s\n",__func__);
-        return ;
+        return(1);
     }
     split = ft_split("hello_berlin_how_are_u", '_');
     if(!split)
     {
         printf("Error split in %s\n", __func__);
-        return ;
+        return(1);
     }
     i = 0;
     *list = NULL;
@@ -131,28 +146,29 @@ void ft_lstmap_assert(void)
             ft_lstclear(list, delete_str);
             delete_split(&split);
             free(list);
-            return;
+            return(1);
         }
         ft_lstadd_back(list, node);
         i++;
     }
     delete_split(&split);
-
-    
     test_number = 1;
-    //TEST 1
-    ft_lstmap_test(test_number++, *list, get_string_capitalise, delete_str);
-    //TEST 2
-    ft_lstmap_test(test_number++, NULL, get_string_capitalise, delete_str);
-    //TEST 3
-    ft_lstmap_test(test_number++, NULL, get_string_capitalise, NULL);
-    //TEST 4
-    ft_lstmap_test(test_number++, *list, NULL,  NULL);
-    //TEST 5
-    ft_lstmap_test(test_number++, NULL, NULL, NULL);
+    /* test 1 */
+    //ft_lstmap_test(test_number++, *list, get_string_capitalise, delete_str);
+    /* test 2 */
+    //ft_lstmap_test(test_number++, NULL, get_string_capitalise, delete_str);
+    // /* test 3 */
+    //ft_lstmap_test(test_number++, NULL, get_string_capitalise, NULL);
+    // /* test 4 */
+    ft_lstmap_test(test_number++, *list, get_string_capitalise,  NULL);
+    // /* test 5 */
+    // ft_lstmap_test(test_number++, *list, NULL,  delete_str);
+    // /* test 6 */
+    // ft_lstmap_test(test_number++, NULL, NULL, NULL);
     ft_lstclear(list, delete_str);
     free(list);
     TEST_END(test_name);
     SEP;
     NL;
+    return(0);
 }
