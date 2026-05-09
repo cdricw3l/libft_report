@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 16:03:02 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 16:23:22 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:40:38 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void ft_tolower_test(int c, int *r)
         }
 }
 
-void ft_tolower_assert(void)
+int main(void)
 {
     char *name_fonction = "ft_tolower";
     TEST_STAR(name_fonction);
@@ -33,14 +33,18 @@ void ft_tolower_assert(void)
 
     r = 1;
     start = RANGE_START;
+    printf("Range test from %d to %d\n", RANGE_START, RANGE_END);
     while (start < RANGE_END && r != 1)
     {
             ft_tolower_test(start, &r);
             start++;
     }
     if (r)
-        printf("ft_tolower  test ->"TEST_OK"\n");
+        printf("result ->"TEST_OK"\n");
+    else
+        printf("result ->"TEST_NOK"\n");
     TEST_END(name_fonction);
     SEP;
     NL;
+    return (0);
 }

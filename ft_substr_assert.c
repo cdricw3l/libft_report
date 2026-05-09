@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 16:39:21 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 10:36:16 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:37:11 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void ft_substr_test(int test_nb, char *s1, size_t start, size_t len, char
     #ifdef __APPLE__
         size_t (*f)(const void *);
         f = malloc_size;
-    #else
+    #endif
+    #ifdef __linux__
         size_t (*f)(void *);
         f = malloc_usable_size;
     #endif
@@ -52,48 +53,61 @@ static void ft_substr_test(int test_nb, char *s1, size_t start, size_t len, char
     if(!expected)
     {
         if (str)
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tresult -> "TEST_NOK"\n\tmemory check ->"TEST_NOK"\n", s_input, s_expect, s_sub);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tResult -> "TEST_NOK"\n\tMemory check ->"TEST_NOK"\n", s_input, s_expect, s_sub);
         else
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tresult -> "TEST_OK"\n\tmemory check ->"TEST_OK"\n", s_input, s_expect, s_sub);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tResult -> "TEST_OK"\n\tMemory check ->"TEST_OK"\n", s_input, s_expect, s_sub);
     }
     else
     {
         if (!strcmp(str, expected))
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: ""%s""\n\tstring compare->" TEST_OK"\n", s_input, s_expect, s_sub);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: ""%s""\n\tString compare->" TEST_OK"\n", s_input, s_expect, s_sub);
         else
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tstring compare->" TEST_NOK"\n", s_input, s_expect, s_sub);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tString compare->" TEST_NOK"\n", s_input, s_expect, s_sub);
         if(f(str) == f(expected))
-            printf("\tmemory size allocation ->"TEST_OK"\n");
+            printf("\tMemory size allocation ->"TEST_OK"\n");
         else
-            printf("\tmemory size allocation ->"TEST_NOK"\n");
+            printf("\tMemory size allocation ->"TEST_NOK"\n");
         free(str);
         free(expected);
     }
 
 }
 
-void ft_substr_assert(void)
+int main(void)
 {
     char *name_fonction = "ft_substr";
     TEST_STAR(name_fonction);
     int test_nb;
 
     test_nb  = 1;
-
+    /* test 1 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 0, strlen("hello 42 Berlin"), strdup("hello 42 Berlin"));
+    /* test 2 */
     ft_substr_test(test_nb++, "hello 42 Berlin", strlen("hello 42 Berlin") - 1, 100, strdup("n"));
+    /* test 3 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 3, 3, strdup("lo "));
+    /* test 4 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 9, 1, strdup("B"));
+    /* test 5 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 9, 100, strdup("Berlin"));
+    /* test 6 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 0, 0, strdup(""));
+    /* test 7 */
     ft_substr_test(test_nb++, "hello 42 Berlin", 1000, 3, strdup(""));
+    /* test 8 */
     ft_substr_test(test_nb++, "hello 42 Berlin", strlen("hello 42 Berlin"), 100, strdup(""));
+    /* test 9 */
     ft_substr_test(test_nb++, "hello 42 Berlin", strlen("hello 42 Berlin"), -1000, strdup(""));
+    /* test 10 */
     ft_substr_test(test_nb++, "hello 42 Berlin", strlen("hello 42 Berlin"), -1000, strdup(""));
+    /* test 11 */
     ft_substr_test(test_nb++, "", 0, 1, strdup(""));
+    /* test 12 */
     ft_substr_test(test_nb++, "", 1000, 3, strdup(""));
+    /* test 13 */
     ft_substr_test(test_nb++, NULL, 0, 100, NULL);
     TEST_END(name_fonction);
     SEP;
     NL;
+    return (0);
 }

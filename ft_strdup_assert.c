@@ -6,18 +6,19 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 15:02:53 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 10:49:11 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:05:59 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-void test_and_clean_str(char *s1, char *s2, int test_nb)
+static void test_and_clean_str(char *s1, char *s2, int test_nb)
 {
     #ifdef __APPLE__
         size_t (*f)(const void *ptr);
         f = malloc_size;
-    #else
+    #endif
+    #ifdef __linux__
         size_t (*f)(void *ptr);
         f = malloc_usable_size;
     #endif
@@ -47,7 +48,7 @@ void test_and_clean_str(char *s1, char *s2, int test_nb)
     }
 }
 
-void ft_strdup_assert(void)
+int main(void)
 {
     TEST_STAR("ft_strdup")
     char *s1;

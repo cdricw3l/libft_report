@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 21:50:35 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 10:52:07 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:52:27 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,25 @@ void ft_putchar_fd_test(int test_number, char c)
 }
 
 
-void ft_putchar_fd_assert(void)
+int main(void)
 {
     char *test_name = "ft_putchar_fd";
     TEST_STAR(test_name);
     int test_number;
     
     test_number = 1;
-    //TEST 1
+    /* test 1 */
     ft_putchar_fd_test(test_number++, 0);
-    //TEST 2
+    /* test 2 */
     ft_putchar_fd_test(test_number++, 65);
-    //TEST 3
+    /* test 3 */
     ft_putchar_fd_test(test_number++, 97);
-    //TEST 4
+    /* test 4 */
     ft_putchar_fd_test(test_number++, -127);
-    //TEST 5
+    /* test 5 */
     ft_putchar_fd_test(test_number++, 127);
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

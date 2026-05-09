@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:34:02 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 15:44:39 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:00:07 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,26 +118,35 @@ static void ft_split_test(int test_nb, char **split, ...)
         clean_split(split);
 }
 
-void ft_split_assert(void)
+int main(void)
 {
     int test_nb;
 
     TEST_STAR("ft_split");
     test_nb = 1;
+    /* test 1 */
     ft_split_test(test_nb++, ft_split(NULL, '_'), NULL);
+    /* test 2 */
     ft_split_test(test_nb++, ft_split("hello_berlin_comment_ca_va", '_'), "hello","berlin", "comment", "ca", "va");
+    /* test 3 */
     ft_split_test(test_nb++, ft_split("hello_berlin_comment_ca_va", '@'), "hello_berlin_comment_ca_va");
+    /* test 4 */
     ft_split_test(test_nb++, ft_split("****************", '*'), NULL);
+    /* test 5 */
     ft_split_test(test_nb++, ft_split("            ****************", '*'), "            ");
+    /* test 6 */
     ft_split_test(test_nb++, ft_split("42*424242*********42", '*'), "42", "424242", "42");
+    /* test 7 */
     ft_split_test(test_nb++, ft_split("42*******424242*********42", '*'), "42", "424242", "42");
+    /* test 8 */
     ft_split_test(test_nb++, ft_split("*********42", '*'), "42");
+    /* test 9 */
     ft_split_test(test_nb++, ft_split("$42$42$42$42$42", '$'), "42", "42", "42", "42", "42");
     char str[6] = {'A','A', -100,'A','A','\0'};
+    /* test 10 */
     ft_split_test(test_nb++, ft_split(str, -100), "AA", "AA");
-    
-    NL;
     TEST_END("ft_split");
     SEP;
     NL;
+    return(0);
 }

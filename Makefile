@@ -4,7 +4,7 @@ GFLAGS = -Wall -Wextra -Werror
 PARENT_DIR = $(shell dirname $(shell pwd))
 NAME = libft_dirty_report
 SRCS = ${wildcard *.c}
-LIB = -L../. -lft
+LIB = -L../. -lft -lbsd
 OBJETS_SRCS = ${SRCS:.c=.o}
 
 %.o:%.c
@@ -22,7 +22,7 @@ UTILS = utils.c
 $(MANDATORY):
 	@make -C $(PARENT_DIR)
 	@$(CC) $(GFLAGS)  $@_assert.c $(UTILS) $(LIB) -o $(NAME)
-	@valgrind  --leak-check=full --show-leak-kinds=all -s ./$(NAME) && rm -f $(NAME)
+	@valgrind --child-silent-after-fork=yes  --leak-check=full --show-leak-kinds=all -q ./$(NAME) && rm -f $(NAME)
 
 
 #whithout argument make call the first target
@@ -33,7 +33,7 @@ ifeq (${shell uname} , Darwin)
 	@leaks -list  --atExit -- ./${NAME}
 else
 	${CC} ${GFLAGS} ${OBJETS_SRCS} ${LIB} -lbsd  -o ${NAME}
-	@valgrind --child-silent-after-fork=yes --leak-check=full --show-leak-kinds=all -s ./${NAME}
+	@valgrind -q --child-silent-after-fork=yes --leak-check=full --show-leak-kinds=all -s ./${NAME}
 endif
 	rm -f *.o
 

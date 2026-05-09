@@ -6,13 +6,13 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 19:28:20 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 15:47:03 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:48:14 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-void ft_memcmp_assert(void)
+int main(void)
 {
     char *test_name = "ft_memcmp";
     TEST_STAR(test_name);
@@ -69,13 +69,13 @@ void ft_memcmp_assert(void)
     if (!str1)
     {
         printf("Error allocation str in %s\n", __func__);
-        return ;
+        return(1) ;
     }
     str2 = ft_strdup("hello paris");
     if (!str2)
     {
         printf("Error allocation str in %s\n", __func__);
-        return ;
+        return(1);
     }
 
     node1.content = str1;
@@ -92,4 +92,5 @@ void ft_memcmp_assert(void)
     TEST_END(test_name);
     SEP;
     NL;
+    return (1);
 }

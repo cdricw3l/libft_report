@@ -6,13 +6,13 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 18:52:31 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 20:27:38 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:55:08 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-void ft_memove_assert(void)
+int  main(void)
 {
     char *test_name = "ft_memmove";
     TEST_STAR(test_name);
@@ -25,7 +25,7 @@ void ft_memove_assert(void)
     
     test_number = 1;
 
-    //TEST 1;
+    /* test 1 */
     // move 7 8 9 -10 at the bgining off arr
     ft_memmove(arr1, &arr1[7], sizeof(int) * 4);
     memmove(arr2, &arr2[7], sizeof(int) * 4);
@@ -35,7 +35,7 @@ void ft_memove_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
 
-    //TEST 2;
+    /* test 2 */
     // move 7 8 9 -10 at idx 7 off arr
     ft_memmove(&arr1[7], arr1, sizeof(int) * 4);
     memmove(&arr2[7], arr2, sizeof(int) * 4);
@@ -44,7 +44,7 @@ void ft_memove_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
     
-    //TEST 3;
+    /* test 3 */
     ft_memmove(&arr1[1], arr1, sizeof(int) * 1);
     memmove(&arr2[1], arr2, sizeof(int) * 1);
     if (arr1[1] == arr2[1])
@@ -52,7 +52,7 @@ void ft_memove_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
     
-    //TEST 4;
+    /* test 4 */
     //move arr1 int arr3 and arr2 in arr4
     ft_memmove(arr3, arr1, sizeof(int) * 10);
     memmove(arr4, arr2, sizeof(int) * 10);
@@ -69,9 +69,8 @@ void ft_memove_assert(void)
         i++;
     }
     printf("Test %d ->"TEST_OK"\n", test_number++);
-    
-
     TEST_END(test_name);
     SEP;
     NL;
+    return (1);
 }

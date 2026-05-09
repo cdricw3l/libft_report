@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 11:20:06 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 11:38:46 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:29:21 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,58 @@ void ft_strrchr_test(int test_nb, char *s, int c)
     p1 = strrchr(s,c);
     p2 = ft_strrchr(s,c);
     if(p1 == p2)
-        printf("\toriginal function -> %p\n\tft fonction -> %p\n\tresult -> " TEST_OK "\n", p1, p2);
+        printf("\toriginal strrchr return -> %p\n\tft_strrchr return -> %p\n\tresult -> " TEST_OK "\n", p1, p2);
     else
-        printf("\toriginal function -> %p\n\tft fonction -> %p\n\tresult -> " TEST_NOK "\n", p1, p2);
+        printf("\toriginal strrchr return -> %p\n\tft_strrchr return -> %p\n\tresult -> " TEST_NOK "\n", p1, p2);
     
 }
 
 
-void ft_strrchr_assert(void)
+int main(void)
 {
-
-    TEST_STAR("ft_strrchr");
-
+    char *test_name = "ft_strrchr";
+    TEST_STAR(test_name);
     char *str;
     int test_nb;
 
     test_nb = 1;
     str = ft_strdup("hello_berlin");
-    assert(str);
-    // Test 1
+    if (!str)
+    {
+        printf("Error string duplication in %s line:%d\n", __func__, __LINE__ - 3);
+        return (1);
+    }
+    /* test 1 */
     ft_strrchr_test(test_nb++, str, 'x');
-    // Test 2
+    /* test 2 */
     ft_strrchr_test(test_nb++, str, 'h');
-    // Test 3
+    /* test 3 */
     ft_strrchr_test(test_nb++, str, 'l');
-    // Test 4
+    /* test 4 */
     ft_strrchr_test(test_nb++, str, 'b');
-    // Test 5
+    /* test 5 */
     ft_strrchr_test(test_nb++, str, '\0');
     free(str);
-    
     str = ft_strdup("");
-    assert(str);
-    // Test 6
+    if (!str)
+    {
+        printf("Error string duplication in %s line:%d\n", __func__, __LINE__ - 3);
+        return (1);
+    }
+    /* test 6 */
     ft_strrchr_test(test_nb++, str, '\0');
-    // Test 7
+    /* test 7 */
     ft_strrchr_test(test_nb++, str, 'A');
     free(str);
     
     char s0[] = {-10, -12, -127, 32, 97, 98, -127, '\0'};
-    // Test 8
+    /* test 8 */
     ft_strrchr_test(test_nb++, s0, -127);
     char s1[] = {-10, -12, -127, 32, 97, 98,'\0'};
-    // Test 9
+    /* test 9 */
     ft_strrchr_test(test_nb++, s1, INT_MAX);
-    
     NL;
-    TEST_END("ft_strrchr");
+    TEST_END(test_name);
     SEP;
-    NL;
+    return (0);
 }

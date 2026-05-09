@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr_assert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdric.b <cdric.b@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:53:09 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 22:24:21 by cdric.b          ###   ########.fr       */
+/*   Updated: 2026/05/09 20:23:32 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,38 @@ void ft_strnstr_test(int test_nb, char *haystack, char *needle, size_t len)
 }
  
 
-void ft_strnstr_assert(void)
+int main(void)
 {
     char *test_name = "ft_strnstr";
     int test_nb;
     TEST_STAR(test_name);
 
     test_nb = 1;
-    
-    //Test 1
+    /* test 1 */
     ft_strnstr_test(test_nb++, "hello_berlin", "berlin", strlen("hello_berlin"));
-    //Test 2
+    /* test 2 */
     ft_strnstr_test(test_nb++, "hello_berlin", "Michel", strlen("hello_berlin"));
-    //Test 3
+    /* test 3 */
     ft_strnstr_test(test_nb++, "hello_berlin", "_", strlen("hello_berlin"));
-    //Test 4
+    /* test 4 */
     ft_strnstr_test(test_nb++, "hello_berlin", "berlin", 5);
-    //Test 5
+    /* test 5 */
     ft_strnstr_test(test_nb++, "hello_berlin", "", 0);
-    //Test 6
+    /* test 6 */
     ft_strnstr_test(test_nb++, "hello_berlin", "", -10);
-    //Test 7
+    /* test 7 */
     ft_strnstr_test(test_nb++, "hello_berlin", "", 100);
-    //Test 8
+    /* test 8 */
     ft_strnstr_test(test_nb++, "hello_berlin", "lin", 1000);
-    //Test 9
+    /* test 9 */
     ft_strnstr_test(test_nb++, "hello_berlin**", "**", strlen("hello_berlin**"));
-    //Test 10
+    /* test 10 */
     ft_strnstr_test(test_nb++, "hello_berlin**", "h", 1);
-    //Test 11
+    /* test 11 */
     ft_strnstr_test(test_nb++, "hello_berlin**", "h", 0);
 
-    NL;
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

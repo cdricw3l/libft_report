@@ -6,13 +6,13 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 19:28:20 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 19:52:19 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:55:44 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-void ft_memcpy_assert(void)
+int main(void)
 {
     char *test_name = "ft_memcpy";
     TEST_STAR(test_name);
@@ -28,7 +28,7 @@ void ft_memcpy_assert(void)
     ft_bzero(arr2, sizeof(int) * 10);
     ft_bzero(arr3, sizeof(int) * 10);
 
-    //Test 1
+    /* test 1 */
     ft_memcpy(arr2, arr1, sizeof(int) * 0);
     memcpy(arr3, arr1, sizeof(int) * 0);
     
@@ -37,7 +37,7 @@ void ft_memcpy_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
 
-    //Test 2
+    /* test 2 */
     ft_memcpy(arr2, arr1, sizeof(int) * 3);
     memcpy(arr3, arr1, sizeof(int) * 3);
     
@@ -45,7 +45,7 @@ void ft_memcpy_assert(void)
         printf("Test %d ->"TEST_OK"\n", test_number++);
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
-    //Test 3
+    /* test 3 */
     ft_memcpy(arr2, arr1, sizeof(int) * 7);
     memcpy(arr3, arr1, sizeof(int) * 7);
     
@@ -54,7 +54,7 @@ void ft_memcpy_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
         
-    //Test 4
+    /* test 4 */
     ft_memcpy(arr2, arr1, sizeof(int) * 10);
     memcpy(arr3, arr1, sizeof(int) * 10);
     
@@ -63,12 +63,12 @@ void ft_memcpy_assert(void)
     else
         printf("Test %d ->"TEST_NOK"\n", test_number++);
     
-    //Test 5
+    /* test 5 */
     str = ft_strdup("hello berlin");
     if (!str)
     {
         printf("Error allocation str in %s\n", __func__);
-        return ;
+        return(1);
     }
     node1.content = str;
     node1.next = NULL;
@@ -83,4 +83,5 @@ void ft_memcpy_assert(void)
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

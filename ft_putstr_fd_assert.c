@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 21:50:35 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 10:47:27 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:58:14 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,20 @@ void ft_putstr_fd_test(int test_number, char *str)
 }
 
 
-void ft_putstr_fd_assert(void)
+int main(void)
 {
     char *test_name = "ft_putstr_fd";
     TEST_STAR(test_name);
     int test_number;
     
     test_number = 1;
-    //TEST 1
+    /* test 1*/
     ft_putstr_fd_test(test_number++,"hello 42 berlin");
-    //TEST 2
+    /* test 2*/
     ft_putstr_fd_test(test_number++,"");
-    //TEST 3
+    /* test 3*/
     ft_putstr_fd_test(test_number++,NULL);
-    //TEST 4
+    /* test 4*/
     ft_putstr_fd_test(test_number++,"hello 42 berlin");
     TEST_END(test_name);
     SEP;

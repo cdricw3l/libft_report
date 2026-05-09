@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 16:35:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 17:49:19 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:32:51 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void ft_strtrim_test(int test_nb, char *s1, char *set, char *expected)
     #ifdef __APPLE__
         size_t (*f)(const void *ptr);
         f = malloc_size;
-    #else
+    #endif
+    #ifdef __linux__
         size_t (*f)(void *ptr);
         f = malloc_usable_size;
     #endif
@@ -51,28 +52,27 @@ void ft_strtrim_test(int test_nb, char *s1, char *set, char *expected)
     if(!expected)
     {
         if (str)
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tresult -> "TEST_NOK"\n\tmemory check ->"TEST_NOK"\n", s_input, s_expect, s_trim);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tResult -> "TEST_NOK"\n\tMemory check ->"TEST_NOK"\n", s_input, s_expect, s_trim);
         else
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tresult -> "TEST_OK"\n\tmemory check ->"TEST_OK"\n", s_input, s_expect, s_trim);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tResult -> "TEST_OK"\n\tMemory check ->"TEST_OK"\n", s_input, s_expect, s_trim);
     }
     else
     {
         if (!strcmp(str, expected))
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: ""%s""\n\tstring compare->" TEST_OK"\n", s_input, s_expect, s_trim);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tString compare->" TEST_OK"\n", s_input, s_expect, s_trim);
         else
-            printf("\tinput: %s\n\texpected output: %s\n\teffective output: %s\n\tstring compare->" TEST_NOK"\n", s_input, s_expect, s_trim);
+            printf("\tInput: %s\n\tExpected output: %s\n\tEffective output: %s\n\tString compare->" TEST_NOK"\n", s_input, s_expect, s_trim);
         if(f(str) == f(expected))
-            printf("\tmemory size allocation ->"TEST_OK"\n");
+            printf("\tMemory size allocation ->"TEST_OK"\n");
         else
-            printf("\tmemory size allocation ->"TEST_NOK"\n");
+            printf("\tMemory size allocation ->"TEST_NOK"\n");
         free(str);
         free(expected);
     }
-
 }
 
 
-void ft_strtrim_assert(void)
+int main(void)
 {
     char *test_name = "ft_strtrim";
     TEST_STAR(test_name);
@@ -82,40 +82,37 @@ void ft_strtrim_assert(void)
 
     test_nb = 1;
 
-    // Test 1
+    /* test 1 */
     ft_strtrim_test(test_nb++,"   ***hello_berlin***   ", " *", strdup("hello_berlin"));
-    // Test 2
+    /* test 1 */
     ft_strtrim_test(test_nb++,"   ***hello_berlin***   ", "XxRr", strdup("   ***hello_berlin***   "));
-    // Test 3
+    /* test 3 */
     ft_strtrim_test(test_nb++,"AAAAAbcbcbcAAAA@bcAAbcAAAbc", "Abc", strdup("@"));
-    // Test 4
+    /* test 4 */
     ft_strtrim_test(test_nb++,"   ***hello_berlin***   ", "", strdup("   ***hello_berlin***   "));
-    // Test 5
+    /* test 5 */
     ft_strtrim_test(test_nb++,"", "   ***hello_berlin***   ", strdup(""));
-    // Test 6
+    /* test 6 */
     ft_strtrim_test(test_nb++,"   ******   ", " *", strdup(""));
-    // Test 7
+    /* test 7 */
     ft_strtrim_test(test_nb++,"**hello***berlin***", " *", strdup("hello***berlin"));
-    // Test 8
+    /* test 8 */
     ft_strtrim_test(test_nb++,"**hello***berlin***42", " *", strdup("hello***berlin***42"));
-    // Test 9
+    /* test 9 */
     ft_strtrim_test(test_nb++, NULL, " *", NULL);
     
     char str1[] = {-10, -10, -50, 97, -10, -50, -10, 0};
     char set[] = {-10, -50, 0};
     s1 = strdup(str1);
     s2 = strdup(set);
-    // Test 10
+    /* test 10 */
     ft_strtrim_test(test_nb++, s1, s2 ,strdup("a"));
-    
-    //TEST 11
+    /* test 10 */
     ft_strtrim_test(test_nb++,"", "", strdup(""));
-    
     free(s1);
     free(s2);
-    NL;
     TEST_END(test_name);
     SEP;
     NL;
-
+    return (0);
 }

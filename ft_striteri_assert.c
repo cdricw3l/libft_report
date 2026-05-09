@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 11:20:23 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/05 10:54:33 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:07:59 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void ft_striteri_test(int test_nb, char *str, char *expected, void (*f)(u
     printf("Test %d: \n", test_nb);
     
     ft_striteri(str, f);
-    
     if(expected)
     {
         if(!str)
@@ -74,26 +73,26 @@ static void ft_striteri_test(int test_nb, char *str, char *expected, void (*f)(u
         free(str);
 }
 
-void ft_striteri_assert(void)
+int main(void)
 {
     TEST_STAR("ft_striteri");
     int test_nb;
 
     test_nb = 1;
-    //Test 1
+    /* test 1 */
     ft_striteri_test(test_nb++, ft_strdup(""), "", iter1);
-    //Test 2
+    /* test 2 */
     ft_striteri_test(test_nb++, ft_strdup("hello_berlin"), "HeLlO_BeRlIn", iter1);
-    //Test 3
+    /* test 3 */
     ft_striteri_test(test_nb++, ft_strdup("hello_berlin"), "hello_berlin", NULL);
-    //Test 4
+    /* test 4 */
     ft_striteri_test(test_nb++, ft_strdup("hello_berlin"), "", iter2);
-    //Test 5
+    /* test 5 */
     ft_striteri_test(test_nb++, NULL, NULL, NULL);
-    //Test 6
+    /* test 6 */
     ft_striteri_test(test_nb++, NULL, NULL, iter1);
     TEST_END("ft_striteri");
     SEP;
     NL;
-    
+    return(0);
 }

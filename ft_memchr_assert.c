@@ -6,17 +6,17 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 18:52:31 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 19:03:46 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:47:36 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assertion.h"
 
-void ft_memchr_assert(void)
+int main(void)
 {
     char *test_name = "ft_memchr";
     TEST_STAR(test_name);
-    char arr[11] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -10};
+    char arr[12] = {1, 2, 3, 4, 5, 6, -1, 7, 8, 9, -10, 0};
     void *ptr1;
     void *ptr2;
     int test_number;
@@ -29,14 +29,14 @@ void ft_memchr_assert(void)
     else
         printf("Test %d ->"TEST_OK"\n", test_number++);
         
-    ptr1 = memchr(arr, 10, sizeof(char) * 10);
-    ptr2 = ft_memchr(arr, 10, sizeof(char) * 10);
+    ptr1 = memchr(arr, 10, sizeof(char) * 12);
+    ptr2 = ft_memchr(arr, 10, sizeof(char) * 12);
     if (ptr1 == ptr2)
         printf("Test %d ->"TEST_OK"\n", test_number++);
     else
         printf("Test %d ->"TEST_OK"\n", test_number++);
-    ptr1 = memchr(arr, -10, sizeof(char) * 10);
-    ptr2 = ft_memchr(arr, -10, sizeof(char) * 10);
+    ptr1 = memchr(arr, -10, sizeof(char) * 12);
+    ptr2 = ft_memchr(arr, -10, sizeof(char) * 12);
     if (ptr1 == ptr2)
         printf("Test %d ->"TEST_OK"\n", test_number++);
     else
@@ -50,4 +50,5 @@ void ft_memchr_assert(void)
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

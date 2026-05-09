@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 11:20:23 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 18:05:09 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:18:25 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void ft_strmapi_test(int test_nb, char *str, char *expected, char (*fnc)(
     #ifdef __APPLE__
         size_t (*f)(const void *ptr);
         f = malloc_size;
-    #else
+    #endif
+    #ifdef __linux__
         size_t (*f)(void *ptr);
         f = malloc_usable_size;
     #endif
-
     r_cmp = -1;
     r_mem = -1;
     printf("Test %d: \n", test_nb);
@@ -78,7 +78,6 @@ static void ft_strmapi_test(int test_nb, char *str, char *expected, char (*fnc)(
         s_expect = NULL_STR;
         s_mapi = NULL_STR;
     }
-    
     if(f(s) == f(expected))
         r_mem = OK;
     else
@@ -98,32 +97,28 @@ static void ft_strmapi_test(int test_nb, char *str, char *expected, char (*fnc)(
         free(expected);
 }
 
-void ft_strmapi_assert(void)
+int main(void)
 {
     TEST_STAR("ft_strmapi");
     int test_nb;
 
     test_nb = 1;
-    //Test 1
+    /* test 1 */
     ft_strmapi_test(test_nb++, "", ft_strdup(""), iter3);
-    //Test 2
+    /* test 2 */
     ft_strmapi_test(test_nb++, "hello_berlin", ft_strdup("AeLlO_BeRlIn"), iter3);
-    //Test 3
-
-    /* Question: what is returned if f == NULL */
-    
+    /* test 3 */
     ft_strmapi_test(test_nb++, "hello_berlin", NULL, NULL);
-    //Test 4
+    /* test 4 */
     char *s = malloc(sizeof(char) * (strlen("hello_berlin") + 1));
     s[0] = '\0';
     ft_strmapi_test(test_nb++, "hello_berlin", s, iter4);
-    //Test 5
+    /* test 5 */
     ft_strmapi_test(test_nb++, NULL, NULL, NULL);
-    //Test 6
+    /* test 6 */
     ft_strmapi_test(test_nb++, NULL, NULL, iter3);
-
     TEST_END("ft_strmapi");
     SEP;
     NL;
-    
+    return (0);   
 }

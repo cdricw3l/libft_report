@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 21:50:35 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 10:47:43 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:57:39 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,23 @@ void ft_putnbr_fd_test(int test_number, char *expected, int n)
 }
 
 
-void ft_putnbr_fd_assert(void)
+int main(void)
 {
     char *test_name = "ft_putnbr_fd";
     TEST_STAR(test_name);
     int test_number;
     test_number = 1;
 
-    //TEST 1
+    /* test 1 */
     ft_putnbr_fd_test(test_number++,"0", 0);
-    //TEST 2
+    /* test 2*/
     ft_putnbr_fd_test(test_number++,"42", 42);
-    //TEST 3
+    /* test 3*/
     ft_putnbr_fd_test(test_number++,"-42", -42);
-    //TEST 4
+    /* test 4*/
     ft_putnbr_fd_test(test_number++,"-2147483648", INT_MIN);
-    //TEST 5
+    /* test 5*/
     ft_putnbr_fd_test(test_number++,"2147483647", INT_MAX);
-
     TEST_END(test_name);
     SEP;
     NL;

@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 12:57:21 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 17:42:03 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:11:26 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,25 @@ void ft_strlcat_test(int test_number, char *src, size_t size, int fill_size)
     
 }   
 
-void ft_strlcat_assert(void)
+int main(void)
 {
     char *test_name = "ft_strlcat";
     TEST_STAR(test_name);
     int test_number;
 
     test_number = 1;
-    
-    //TEST 1
+    /* test 1 */
     ft_strlcat_test(test_number++, "hello_world", ft_strlen("hello_world"), 0);
-    //TEST 2
+    /* test 2 */
     ft_strlcat_test(test_number++, "hello_world42", 3, 1);
-    //TEST 3
+    /* test 3 */
     ft_strlcat_test(test_number++, "hello_world42", 1, 0);
-    //TEST 4
+    /* test 4 */
     ft_strlcat_test(test_number++, "", 100, 0);
-    //TEST 5
+    /* test 5 */
     ft_strlcat_test(test_number++, "hello_world42hello_world42hello_world42", 100, 10);
-    
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

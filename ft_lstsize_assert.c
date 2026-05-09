@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 14:36:49 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/07 17:43:37 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:18:30 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void ft_lstsize_test(int test_number, size_t size)
 {
-    t_list *list;
+    t_list **list;
     int r;
 
     printf("Test %d:\n", test_number);
-    list = create_lst(size, NULL);
+    list = create_lst(size);
     if (!list && size > 0)
     {
         printf("Error list creation in %s\n", __func__ );
         return ;
     }    
-    r = ft_lstsize(list);
+    r = ft_lstsize(*list);
     if (r == (int)size)
-        printf("\texpected size: %ld size return: %d"TEST_OK"\n", size, r);
+        printf("\texpected size: %ld\n\tsize return: %d\n\tresult ->"TEST_OK"\n", size, r);
     else
-        printf("\texpected size: %ld size return: %d"TEST_NOK"\n", size, r);
-    delete_lst(list);
+        printf("\texpected size: %ld\n\tsize return: %d\n\tresult ->"TEST_NOK"\n", size, r);
+    delete_lst(list, NULL);
 }
 
-void ft_lstsize_assert(void)
+int main(void)
 {
     char *test_name = "ft_lstsize";
     int test_number;
@@ -40,16 +40,17 @@ void ft_lstsize_assert(void)
 
     test_number = 1;
 
-    //TEST 1
+    /* test 1 */
     ft_lstsize_test(test_number++, 10);
     
-    //TEST 2
+    /* test 2 */
     ft_lstsize_test(test_number++, 1);
 
-    //TEST 3
+    /* test 3 */
     ft_lstsize_test(test_number++, 0);
 
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }

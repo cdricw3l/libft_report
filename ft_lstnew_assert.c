@@ -9,7 +9,7 @@ void ft_lstnew_test(int test_nb, void *content)
         size_t (*f)(const void *ptr);
         f = malloc_size;
     #endif
-    #ifdef  __unix__
+    #ifdef  __linux__
         size_t (*f)(void *ptr);
         f = malloc_usable_size;
     #endif
@@ -41,9 +41,9 @@ void ft_lstnew_test(int test_nb, void *content)
     free(test_node);
     /* checking if the next node is NULL */
     if (node->next == NULL)
-        printf("\tnext ptr check ->"TEST_OK"\n");
+        printf("\tnext pointer check ->"TEST_OK"\n");
     else
-        printf("\tnext ptr check ->"TEST_NOK"\n");
+        printf("\tnext pointer check ->"TEST_NOK"\n");
 
     free(node);
 }

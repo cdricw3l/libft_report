@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 12:57:21 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/08 13:44:48 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 20:14:35 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,27 @@ void ft_strlcpy_test(int test_number, char *src, int nmemb)
         printf("\tstring compare ->"TEST_OK"\n");
     free(b1);
     free(b2);
-    
 }   
 
-void ft_strlcpy_assert(void)
+int main(void)
 {
     char *test_name = "ft_strlcpy";
     TEST_STAR(test_name);
     int test_number;
 
     test_number = 1;
-    
-    //TEST 1
+    /* test 1 */
     ft_strlcpy_test(test_number++, "hello_world", ft_strlen("hello_world"));
-    //TEST 2
+    /* test 2 */
     ft_strlcpy_test(test_number++, "hello_world42", 3);
-    //TEST 3
+    /* test 3 */
     ft_strlcpy_test(test_number++, "hello_world42", 1);
-    //TEST 4
+    /* test 4 */
     ft_strlcpy_test(test_number++, "", 100);
-    //TEST 5
+    /* test 5 */
     ft_strlcpy_test(test_number++, "hello_world42hello_world42hello_world42", 0);
-    
     TEST_END(test_name);
     SEP;
     NL;
+    return (0);
 }
