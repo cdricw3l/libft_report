@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:20:44 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 14:47:16 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:05:17 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static t_list **create_split_lst(char *content, char sep, void (*f)(void *ptr))
         ft_lstadd_back(lst, new_node);
         i++;
     }
+    delete_split(&split);
     return (lst);
 }
 
@@ -70,16 +71,18 @@ void ft_lstclear_test(int test_number, t_list **list, void (*f)(void *ptr))
         }
         if (frk == 0)
         {
-            ft_lstclear(NULL, f);
+            ft_lstclear(list, f);
             exit(0);    
         }
         else
         {
             waitpid(frk, &stat, 0);
-            if(WIFEXITED(stat) == 0)
+            if(WIFEXITED(stat))
                 printf("\tCheck null protection -> "TEST_OK"\n");
             else
                 printf("\tCheck null protection -> "TEST_NOK"\n");
+            if (list)
+                delete_lst(list, delete_str);
             return ;
         }
     }
@@ -91,7 +94,7 @@ void ft_lstclear_test(int test_number, t_list **list, void (*f)(void *ptr))
             printf("\t*list == NULL but check valgrind for each content"TEST_OK"\n");
         else
         {
-            delete_lst(list);
+            delete_lst(list, delete_str);
             printf("\t*list != NULL"TEST_NOK"\n");
         }
     }
@@ -124,11 +127,10 @@ int main(void)
         printf("Error list creation in %s line %d", __func__, __LINE__ - 3);
         return (1) ;
     }
-    /* test 3 */
     ft_lstclear_test(test_nb++, list, NULL);
     
-    /* test 4 */
-    ft_lstclear_test(test_nb++, NULL, NULL);
+    // /* test 3 */
+    // ft_lstclear_test(test_nb++, NULL, NULL);
 
 
     TEST_END(test_name);

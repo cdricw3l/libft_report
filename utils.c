@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 13:23:13 by cebouhad          #+#    #+#             */
-/*   Updated: 2026/05/09 14:43:39 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:04:35 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ t_list **create_lst(size_t size)
     return (list);
 }
 
-void delete_lst(t_list **list)
+void delete_lst(t_list **list, void (*f)(void *ptr))
 {
     t_list **tmp_lst;
     t_list *tmp_node;
@@ -137,6 +137,8 @@ void delete_lst(t_list **list)
     {
         tmp_node = *tmp_lst;
         *tmp_lst = (*tmp_lst)->next;
+        if(f)
+            f(tmp_node->content);
         free(tmp_node);
         tmp_node = NULL;
     }

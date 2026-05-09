@@ -22,7 +22,7 @@ UTILS = utils.c
 $(MANDATORY):
 	@make -C $(PARENT_DIR)
 	@$(CC) $(GFLAGS)  $@_assert.c $(UTILS) $(LIB) -o $(NAME)
-	@./$(NAME) && rm -f $(NAME)
+	@valgrind --child-silent-after-fork=yes --leak-check=full --show-leak-kinds=all -s ./$(NAME) && rm -f $(NAME)
 
 
 #whithout argument make call the first target
